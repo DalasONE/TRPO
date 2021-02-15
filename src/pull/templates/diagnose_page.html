@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnose Page</title>
+</head>
+<body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <form method="GET" action='/home'>
+                <a class="navbar-item">
+                  <button class="button is-primary" onclick="">
+                  Main Page
+                </button>
+                </a>
+                </form>
+                <form method="GET" action='/predict'>
+                    <a class="navbar-item">
+                    {% if request.session.S_state > 2 and request.session.S_state < 18 %}
+                      <button  class="button is-primary" onclick="">
+                      Predict
+                    </button>
+                    {% endif %}
+                    </a>
+                    </form>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+      </nav>
+      <h1 class="title is-1" style="margin-left: 30%;">Choose your sympthons Current - {{request.session.S_state}}</h1>
+      <h2 class="title is-2" style="margin-left: 30%;">{{request.session.Diagnose}}</h2>
+      <p>{{request.session.Diagnose_Desc}}</p>
+      <form class="form-group" style="margin-left: 40%;margin-top: 15%;" method="GET" action="/symphtom/"  >
+        <div class="select">
+            <select name="sympthom">
+            <div  class="select is-large" style="width: 30%;">
+                {% for val in request.session.sympthons %}
+                <option value={{val}}  >{{ val }}</option>
+                {% endfor %}
+            </div>  
+            </div>
+        </select>
+          </div>
+          <div class="control" style="margin-top: 5%;margin-left: 5%;">
+            <button class="button is-primary">Submit</button>
+          </div>
+              
+      </form>
+</body>
+</html>

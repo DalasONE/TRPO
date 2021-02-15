@@ -1,0 +1,96 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="favicon.ico" type="image/x-icon"/>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.3/build/pure-min.css" integrity="sha384-cg6SkqEOCV1NbJoCu11+bm0NvBRc8IYLRGXkmNrqUBfTjmMYwNKPWBTIKyw9mHNJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
+    <script defer src="{% static '/js/index.js' %}"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main Page</title>
+    <link rel="stylesheet" href="https://www.jsdelivr.com/package/npm/bulma">
+</head>
+<body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+          <a class="navbar-item" >
+            <img src="{% static '/images/Corner.png' %}" width="112" height="65">
+          </a>
+      
+          <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </a>
+        </div>
+      
+        <div id="navbarBasicExample" class="navbar-menu">
+          <div class="navbar-start">
+            <form method="GET" action="/diagnose/">
+            <a class="navbar-item">
+              <button class="button is-primary" onclick="">
+              Diagnose
+            </button>
+            </a>
+            </form>
+            <div class="navbar-item">
+            <form method="GET" action="/precaution/">
+              <button class="button is-info" onclick="">
+              Precaution
+              </button>
+            </form>
+            </div>
+            <div class="navbar-item ">
+              <a class="navbar-item" href="https://tabletka.by">
+                Medicines
+              </a>  
+            </div>
+          </div>
+      
+          <div class="navbar-end">
+            <div class="navbar-item">
+                <p class="subtitle is-4">{{request.user.username}}</p>
+            </div>
+            <div class="navbar-item">
+                <form method="GET" action="/logout/">
+                <button class="button is-warning" onclick="">Logout</button>
+                </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+      
+      <div class="columns">
+        <div class="column">
+          <p class="bd-notification is-info">Diseases</p>
+            <div class="column">
+              {% for val in request.session.P_d %}
+              <form method="GET" action="/recoverd/" >
+              <param class="bd-notification is-info" value={{val}} name="Dis_rec" style="font-size: 150%;background-color:#66ff99;display: inline;">{{val}}</param>
+              <button class="button is-primary is-light" onclick="">Recovered</button>
+              {% endfor %}
+              </form>
+            </div>
+        </div>
+      </div>
+      <div class="flex-container" style="display: flex; justify-content: space-between;" >
+      <div style="width: 50%;">
+      <p class="title is-2" style="text-align: center;">Insurance</p>
+      <img width="100%"  src="{% static '/images/barplot.png' %}" >
+      </div>
+      <div>
+      <p class="title is-2" style="text-align: center;" >Corellation</p>
+      <img  src="{% static '/images/heatmap.png' %}" >
+      </div>
+      </div>  
+    
+</body>
+
+</html>
